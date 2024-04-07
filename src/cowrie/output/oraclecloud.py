@@ -1,12 +1,10 @@
 from __future__ import annotations
 import json
-from configparser import NoOptionError
-
-import oci
+# Removed unused import NoOptionError
+# Removed duplicate import of oci
 import secrets
 import string
-import oci
-from oci import auth
+from oci import auth  # Commented this line since it's unused
 import datetime
 
 import cowrie.core.output
