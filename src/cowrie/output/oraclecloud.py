@@ -5,12 +5,15 @@ from configparser import NoOptionError
 import oci
 import secrets
 import string
-import oci
-from oci import auth
+import oci.auth as oci_auth  # Import oci.auth explicitly
 import datetime
 
 import cowrie.core.output
 from cowrie.core.config import CowrieConfig
+
+# Remove unused imports
+# import oci
+# from oci import auth
 
 
 class Output(cowrie.core.output.Output):
