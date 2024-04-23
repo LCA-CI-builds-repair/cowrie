@@ -2,10 +2,17 @@
 # See the COPYRIGHT file for more information
 
 
-# Modified by Fabiola Buschendorf, https://github.com/FabiolaBusch
-
-
-from __future__ import annotations
+# Modified by Fabiola Buschendorf, https://github.com/Fa  --color=COLOR           control whether color is used
+  --releasever=RELEASEVER set value of $releasever in yum config and repo files
+  --downloadonly          don't update, just download
+  --downloaddir=DLDIR     specifies an alternate directory to store packages
+  --setopt=SETOPTS        set arbitrary config and repo options
+  --bugfix                Include bugfix relevant packages, in updates
+  --security              Include security relevant packages, in updates
+  --advisory=ADVS         Include packages needed to fix the given advisory, in updates
+  --bzs=BZS               Include packages needed to fix the given BZ, in updates
+  --cves=CVES             Include packages needed to fix the given CVE, in updates
+  --sec-severity=SEVS     Include security relevant packages matching the severity level __future__ import annotations
 
 import hashlib
 import random
