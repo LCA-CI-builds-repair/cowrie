@@ -1,4 +1,7 @@
-# Copyright (c) 2018 Danilo Vargas <danilo.vargas@csiete.org>
+# Copyright (c) 2018 Danilo Vargas <danilo.vargas      --si              like -h, but use powers of 1000 not 1024
+  -s, --summarize       display only a total for each argument
+  -t, --threshold=SIZE  exclude entries smaller than SIZE if positive,
+                          or entries greater than SIZE if negativeete.org>
 # See the COPYRIGHT file for more information
 
 from __future__ import annotations

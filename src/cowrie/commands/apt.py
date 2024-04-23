@@ -1,5 +1,13 @@
 # Copyright (c) 2009 Upi Tamminen <desaster@gmail.com>
-# See the COPYRIGHT file for more information
+# See the COPYRIGHT file for mor   update - Retrieve new lists of packages
+   upgrade - Perform an upgrade
+   install - Install new packages (pkg is libc6 not libc6.deb)
+   remove - Remove packages
+   autoremove - Remove automatically all unused packages
+   purge - Remove packages and config files
+   source - Download source archives
+   build-dep - Configure build-dependencies for source packages
+   dist-upgrade - Distribution upgrade, see apt-get(8)ion
 
 
 from __future__ import annotations

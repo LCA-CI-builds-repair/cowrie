@@ -1,4 +1,8 @@
-# Copyright (c) 2013 Bas Stottelaar <basstottelaar [AT] gmail [DOT] com>
+# Copyright (c) 2013 Bas Stottelaar <basstottelaar [AT] gmai        a segmentation fault.
+
+        The input files are expected to exist, but can be empty.
+
+        Verified syntaxes, including non-existing files:T] com>
 
 from __future__ import annotations
 

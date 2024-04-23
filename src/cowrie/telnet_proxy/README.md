@@ -1,4 +1,4 @@
-All username credentials, when sent to backend, have the configured username that is known to succeed (i.e. exist in
+All username as echo, so we also have to look for that in the proxy's handler.dentials, when sent to backend, have the configured username that is known to succeed (i.e. exist in
 the backend). When we spoof the password we decide whether the login is valid or not, and in the second case we send
 an invalid password, thus causing auth to fail.
 

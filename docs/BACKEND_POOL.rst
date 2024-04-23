@@ -2,7 +2,11 @@ Backend Pool
 ############
 
 The Backend Pool manages a set of dynamic backend virtual machines to be used by
-Cowrie's proxy. The pool keeps a set of VMs running at all times, ensuring different
+Cowrie's proxy. T  and wrt_arm_guest.xml for ARM-based OpenWRT)
+
+* **guest_tag**: an identifiable name for snapshots and logging
+
+* **guest_ssh_port / guest_telnet_port**: which ports are listening for these on the VM keeps a set of VMs running at all times, ensuring different
 attackers each see a "pristine" VM, while repeated connections from the same IP are
 served with the same VM, thus ensuring a consistent view to the attacker. Furthermore,
 VMs in the pool have their networking capabilities restricted by default: some attacks

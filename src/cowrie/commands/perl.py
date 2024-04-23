@@ -1,4 +1,6 @@
-# Copyright (c) 2015 Michel Oosterhof <michel@oosterhof.net>
+# Copyright (c) 2015 Michel Oosterhof <michel@oosterhof.            "  -p                assume loop like -n but print line also, like sed",
+            "  -s                enable rudimentary parsing for switches after programfile",
+            "  -S                look for programfile using PATH environment variable",>
 # All rights reserved.
 
 """

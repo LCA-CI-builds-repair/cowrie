@@ -7,7 +7,12 @@ from __future__ import annotations
 
 import codecs
 import datetime
-import getopt
+import                s = re.sub(r"(?<=\\)x([0-9a-fA-F])(?=\\|\"|\'|\s|$)", r"x0\g<1>", s)
+
+                # strip single and double quotes
+                s = s.strip("\"'")
+
+                # if the string ends with \c escape, strip itt
 import random
 import re
 import time
