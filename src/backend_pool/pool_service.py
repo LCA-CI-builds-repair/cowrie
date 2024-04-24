@@ -3,8 +3,19 @@ The server interfaces exposes a producer-consumer infinite loop
 that runs on _pool_service.py_.
 
 The **producer** is an infinite loop started by the server, and
-runs every 5 seconds. It creates VMs up to the configured limit,
-checks which VMs become available (by testing if they accept SSH
+runs every 5 seconds. It creates VMs up to the configured limit        """
+        This method checks if a guest has either SSH or Telnet
+        connectivity to determine its readiness for connections
+        and health status. It considers the enabled services
+        and if SSH is available, Telnet check is not necessary.
+        """
+        # Check SSH connectivity if enabled in configs; if disabled, check Telnet
+        has_ssh = backend_pool.util.nmap_port(ip, self.ssh_port) if self.ssh_port > 0 else False
+
+        # Telnet check not needed if SSH is available
+        has_telnet = backend_pool.util.nmap_port(ip, self.telnet_port) if self.telnet_port > 0 and not has_ssh else True
+
+        return has_ssh or has_telnetome available (by testing if they accept SSH
 and/or Telnet connections), and destroys VMs that are no longer
 needed.
 

@@ -1,7 +1,17 @@
 How to send Cowrie output to Threat Jammer
-##########################################
+#######################################Rate Limits and Buffers
+=======================
+The output module will send the information every 60 seconds or if the buffer of pending IP addresses to send to the Report API reaches 1000. The first condition will trigger the send action to the Report API server.
 
-.. image:: https://threatjammer.com/threatjammer-risk-score.png
+Rate Limit Per API Key
+=======================
+There is a limit of 6 hits per minute per API Key. If the limit is reached, the service returns a 429 response code. A single honeypot should never trigger the rate limit.
+
+About the Module
+================
+Python and OS Versions
+=======================
+The code has passed the tests implemented in the CI workflows, as expected. This module is compatible with versions of Python from v3.7 and higher.:: https://threatjammer.com/threatjammer-risk-score.png
     :align: center
     :width: 400
     :height: 200

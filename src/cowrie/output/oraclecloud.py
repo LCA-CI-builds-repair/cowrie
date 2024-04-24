@@ -1,4 +1,29 @@
-from __future__ import annotations
+fimport json
+from configparser import NoOptionError
+import oci
+import secrets
+import string
+import datetime
+
+import cowrie.core.output
+from cowrie.core.config import CowrieConfig
+
+class Output(cowrie.core.output.Output):
+    """
+    Oracle Cloud output
+    """
+
+    def generate_random_log_id(self):
+        charset = string.ascii_letters + string.digits
+        random_log_id = ''.join(secrets.choice(charset) for _ in range(32))
+        return f"cowrielog-{random_log_id}"
+
+    def sendLogs(self, logentry):
+        log_id = self.generate_random_log_id()
+        # Initialize service client with default config file
+        current_time = datetime.datetime.utcnow()
+        self.log_ocid = CowrieConfig.get("output_oraclecloud", "log_ocid")
+        self.hostname = CowrieConfig.get("honeypot", "hostname")s
 import json
 from configparser import NoOptionError
 

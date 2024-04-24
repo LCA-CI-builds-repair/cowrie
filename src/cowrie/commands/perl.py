@@ -1,4 +1,19 @@
-# Copyright (c) 2015 Michel Oosterhof <michel@oosterhof.net>
+# Copyright (c) 201    def version(self) -> List[str]:
+        output = [
+            "",
+            "This is perl 5, version 14, subversion 2 (v5.14.2) built for x86_64-linux-thread-multi",
+            "",
+            "Copyright 1987-2014, Larry Wall",
+            "",
+            "Perl may be copied only under the terms of either the Artistic License or the",
+            "GNU General Public License, which may be found in the Perl 5 source kit.",
+            "",
+            "Complete documentation for Perl, including FAQ lists, should be found on",
+            'this system using "man perl" or "perldoc perl".  If you have access to the',
+            "Internet, point your browser at http://www.perl.org/, the Perl Home Page.",
+            "",
+        ]
+        return outputhof <michel@oosterhof.net>
 # All rights reserved.
 
 """

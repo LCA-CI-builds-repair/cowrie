@@ -7,10 +7,39 @@ from __future__ import annotations
 
 import codecs
 import datetime
-import getopt
-import random
-import re
-import time
+import ge                s = s.strip("\"'")
+
+                # if the string ends with \c escape, strip it
+                if s.endswith("\\c"):
+                    s = s[:-2]
+
+                data: bytes = codecs.escape_decode(s)[0]  # type: ignore
+                self.writeBytes(data)
+
+
+commands["/usr/bin/printf"] = Command_printf
+commands["printf"] = Command_printf
+
+
+class Command_exit(HoneyPotCommand):
+    def call(self) -> None:
+        stat = failure.Failure(error.ProcessDone(status=""))
+        self.protocol.terminal.transport.processEnded(stat)
+
+
+commands["exit"] = Command_exit
+commands["logout"] = Command_exit
+
+
+class Command_clear(HoneyPotCommand):
+    def call(self) -> None:
+        self.protocol.terminal.reset()
+
+
+commands["/usr/bin/clear"] = Command_clear
+commands["clear"] = Command_clear
+commands["/usr/bin/reset"] = Command_clear
+commands["reset"] = Command_cleartime
 from collections.abc import Callable
 
 from twisted.internet import error, reactor

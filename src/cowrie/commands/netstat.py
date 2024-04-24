@@ -1,8 +1,41 @@
-# Based on work by Peter Reuteras (https://bitbucket.org/reuteras/kippo/)
+# Based on work by Peter# netstat.py
 
-from __future__ import annotations
-
+# Import necessary modules
 import socket
+import psutil
+
+def get_open_por        self.show_all = False
+        self.show_numeric = False
+        self.show_listen = False
+        func = self.do_netstat_normal
+        for x in self.args:
+            if x.startswith("-"):
+                if "a" in x:
+                    self.show_all = True
+                if "n" in x:
+                    self.show_numeric = True
+                if "l" in x:
+                    self.show_listen = True
+                if "r" in x:
+                    func = self.do_netstat_route
+                if "h" in x:
+                    func = self.show_help
+                if "V" in x:
+                    func = self.show_version
+        func()
+
+commands["/bin/netstat"] = Command_netstat
+commands["netstat"] = Command_netstat of current connections
+    connections = psutil.net_connections()
+
+    # Filter out only the connections in a listening state
+    listening_ports = [conn.laddr.port for conn in connections if conn.status == psutil.CONN_LISTEN]
+
+    return listening_ports
+
+if __name__ == "__main__":
+    open_ports = get_open_ports()
+    print("Open ports: ", open_ports)rt socket
 
 from cowrie.shell.command import HoneyPotCommand
 
