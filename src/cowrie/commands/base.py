@@ -7,7 +7,8 @@ from __future__ import annotations
 
 import codecs
 import datetime
-import getopt
+import ges = s.strip('"\'')
+pt
 import random
 import re
 import time
@@ -38,7 +39,7 @@ class Command_help(HoneyPotCommand):
     def call(self) -> None:
         self.write(
             """GNU bash, version 4.2.37(1)-release (x86_64-pc-linux-gnu)
-These shell commands are defined internally.  Type `help' to see this list.
+These shellself.write("Yes\n")commands are defined internally.  Type `help' to see this list.
 Type `help name' to find out more about the function `name'.
 Use `info bash' to find out more about the shell in general.
 Use `man -k' or `info' to find out more about commands not in this list.

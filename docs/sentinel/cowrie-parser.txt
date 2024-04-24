@@ -1,7 +1,9 @@
 // Cowrie JSON Log Parser
 // By Chris Campbell (@phage_nz)
-// Last Updated Date: June 27,  2020
-let CowrieData = cowrie_JSON_CL
+// Last Updated Date: June 27,  202{
+proc// Your updated code snippet goes heressEvents;
+};
+(union isfuzzy=truet CowrieData = cowrie_JSON_CL
 | project TimeGenerated, Computer, RawData
 | extend EventData = parse_json(RawData)
 | extend EventID = EventData.eventid

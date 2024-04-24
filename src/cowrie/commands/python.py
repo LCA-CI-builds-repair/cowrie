@@ -1,8 +1,52 @@
-# Copyright (c) 2015 Michel Oosterhof <michel@oosterhof.net>
-# All rights reserved.
+# Copyright (c) 2015 Michel Oosterhof <michel@oosteimport getopt
 
-"""
-This module contains the python commnad
+class Command_python(HoneyPotCommand):
+    """
+    Command to simulate Python execution.
+    """
+
+    def start(self) -> None:
+        try:
+            opts, args = getopt.getopt(
+                self.args, "BdEhiORsStuvVx3c:m:Q:W:", ["help", "version"]
+            )
+        except getopt.GetoptError as err:
+            self.write(f"Unknown option: -{err.opt}\n")
+            self.write(
+                "usage: python [option] ... [-c cmd | -m mod | file | -] [arg] ... \n"
+            )
+            self.write("Try `python -h' for more information.\n")
+            self.exit()
+            return
+
+        # Parse options
+        for o, _a in opts:
+            if o == "-V":
+                self.version()
+                self.exit()
+                return
+            elif o == "--help" or o == "-h":
+                self.help()
+                self.exit()
+                return
+            elif o == "--version":
+                self.version()
+                self.exit()
+                return
+
+        for value in args:
+            sourcefile = self.fs.resolve_path(value, self.protocol.cwd)
+
+            if self.fs.exists(sourcefile) or value == "-":
+                self.exit()
+            else:
+                self.write(
+                    f"python: can't open file '{value}': [Errno 2] No such file or directory\n"
+                )
+                self.exit()
+
+        if not len(self.args):
+            pass commnad
 """
 from __future__ import annotations
 

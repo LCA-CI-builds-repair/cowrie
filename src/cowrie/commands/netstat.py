@@ -1,4 +1,79 @@
-# Based on work by Peter Reuteras (https://bitbucket.org/reuteras/kippo/)
+# Based on work by Peter Reuteras (https://bitbucket.org/reList of possKernel IP rou    def do_netstat_normal(self) -> None:
+        self.write(
+            """Active Internet connections (w/o servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State\n"""
+        )
+        s_name = self.protocol.hostname
+        c_port = str(self.protocol.realClientPort)
+        if self.show_numeric:
+            s_port = "22"
+            c_name = str(self.protocol.clientIP)
+            s_name = str(self.protocol.kippoIP)
+        else:
+            s_port = "ssh"
+            try:
+                c_name = socket.gethostbyaddr(self.protocol.clientIP)[0][:17]
+            except Exception:
+                c_name = self.protocol.clientIP
+
+        if self.show_listen or self.show_all:
+            self.write(
+                "tcp        0      0 *:ssh                   *:*                     LISTEN\n"
+            )
+
+        if not self.show_listen or self.show_all:
+            line = "tcp        0    308 {}:{}{}{}:{}{}{}".format(
+                s_name,
+                s_port,
+                " " * (24 - len(s_name + s_port) - 1),
+                c_name,
+                c_port,
+                " " * (24 - len(c_name + c_port) - 1),
+                "ESTABLISHED",
+            )
+            self.write(f"{line}\n")
+
+        if self.show_listen or self.show_all:
+            self.write(
+                "tcp6       0      0 [::]:ssh                [::]:*                  LISTEN\n"
+            )
+
+        self.write(
+            """Active UNIX domain sockets (only servers)
+Proto RefCnt Flags       Type       State         I-Node   Path\n"""
+        )
+
+        if self.show_listen:
+            self.write(
+                """unix  2      [ ACC ]     STREAM     LISTENING     8969     /var/run/acpid.socket
+unix  2      [ ACC ]     STREAM     LISTENING     6807     @/com/ubuntu/upstart
+unix  2      [ ACC ]     STREAM     LISTENING     7299     /var/run/dbus/system_bus_socket
+unix  2      [ ACC ]     SEQPACKET  LISTENING     7159     /run/udev/control\n"""
+            )
+
+        elif self.show_all:
+            self.write(
+                """unix  2      [ ACC ]     STREAM     LISTENING     8969     /var/run/acpid.socket
+unix  4      [ ]         DGRAM                    7445     /dev/log
+unix  2      [ ACC ]     STREAM     LISTENING     6807     @/com/ubuntu/upstart
+unix  2      [ ACC ]     STREAM     LISTENING     7299     /var/run/dbus/system_bus_socket
+unix  2      [ ACC ]     SEQPACKET  LISTENING     7159     /run/udev/control
+... (additional UNIX domain socket entries)
+unix  3      [ ]         STREAM     CONNECTED     8619     @/com/ubuntu/upstart\n"""
+            )
+
+        else:
+            self.write(
+                # Handle the case where neither show_listen nor show_all is True
+                "Handle the remaining cases here\n"
+            )t Ifacee address families (which support routing):
+- inet (DARPA Internet)
+- inet6 (IPv6)
+- ax25 (AMPR AX.25)
+- netrom (AMPR NET/ROM)
+- ipx (Novell IPX)
+- ddp (Appletalk DDP)
+- x25 (CCITT X.25)as/kippo/)
 
 from __future__ import annotations
 

@@ -1,4 +1,35 @@
-from __future__ import annotations
+froimport oci
+import secrets
+import string
+import datetime
+import oci
+import secrets
+import string
+import datetime
+
+import cowrie.core.output
+from cowrie.core.config import CowrieConfig
+
+class Output(cowrie.core.output.Output):
+    """
+    Oracle Cloud output
+    """
+
+    def generate_random_log_id(self):
+        charset = string.ascii_letters + string.digits
+        random_log_id = ''.join(secrets.choice(charset) for _ in range(32))
+        return f"cowrielog-{random_log_id}"import cowrie.core.output
+from cowrie.core.config import CowrieConfig
+
+class Output(cowrie.core.output.Output):
+    """
+    Oracle Cloud output
+    """
+
+    def generate_random_log_id(self):
+        charset = string.ascii_letters + string.digits
+        random_log_id = ''.join(secrets.choice(charset) for _ in range(32))
+        return f"cowrielog-{random_log_id}"otations
 import json
 from configparser import NoOptionError
 
