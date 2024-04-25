@@ -188,19 +188,20 @@ class Command_printf(HoneyPotCommand):
                 s = "".join(self.args[0]).replace("\\\\x", "\\x")
 
                 # replace single character escape \x0 with \x00
-                s = re.sub(r"(?<=\\)x([0-9a-fA-F])(?=\\|\"|\'|\s|$)", r"x0\g<1>", s)
+import re
+import codecs
 
-                # strip single and double quotes
-                s = s.strip("\"'")
+s = re.sub(r"(?<=\\)x([0-9a-fA-F])(?=\\|\"|\'|\s|$)", r"x0\g<1>", s)
 
-                # if the string ends with \c escape, strip it
-                if s.endswith("\\c"):
-                    s = s[:-2]
+# Strip single and double quotes
+s = s.strip("\"'")
 
-                data: bytes = codecs.escape_decode(s)[0]  # type: ignore
-                self.writeBytes(data)
+# If the string ends with \c escape, strip it
+if s.endswith("\\c"):
+    s = s[:-2]
 
-
+data: bytes = codecs.escape_decode(s)[0]  # type: ignore
+self.writeBytes(data)
 commands["/usr/bin/printf"] = Command_printf
 commands["printf"] = Command_printf
 

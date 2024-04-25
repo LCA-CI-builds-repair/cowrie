@@ -75,12 +75,12 @@ class PoolService:
 
         created:     initialised but not fully booted by QEMU
         available:   can be requested
-        using:       a client is connected, can be served for other clients from same ip
-        used:        client disconnectec, but can still be served for its ip
+        using:       a client is connected, can be served for other clients from the same IP
+        used:        client disconnected, but can still be served for its IP
         unavailable: marked for destruction after timeout
-        destroyed:   deleted by qemu, can be removed from list
+        destroyed:   deleted by QEMU, can be removed from the list
 
-    A lock is required to manipulate VMs in states [available,
+    A lock is required to manipulate VMs in states [available],
     using, used], since these are the ones that can be accessed by
     several consumers and the producer. All other states are accessed
     only by the single producer.

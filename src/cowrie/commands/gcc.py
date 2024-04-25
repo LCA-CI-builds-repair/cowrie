@@ -52,16 +52,15 @@ class Command_gcc(HoneyPotCommand):
     )
 
     scheduled: Deferred
-
     def start(self) -> None:
         """
         Parse as much as possible from a GCC syntax and generate the output
         that is requested. The file that is generated can be read (and will)
         output garbage from an actual file, but when executed, it will generate
         a segmentation fault.
-
-        The input files are expected to exists, but can be empty.
-
+        
+        The input files are expected to exist, but can be empty.
+        
         Verified syntaxes, including non-existing files:
         * gcc test.c
         * gcc test.c -o program
