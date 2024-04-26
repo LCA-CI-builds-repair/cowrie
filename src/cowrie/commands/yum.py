@@ -166,13 +166,10 @@ Options:
   --bugfix              Include bugfix relevant packages, in updates
   --security            Include security relevant packages, in updates
   --advisory=ADVS, --advisories=ADVS
-                        Include packages needed to fix the given advisory, in
-                        updates
-  --bzs=BZS             Include packages needed to fix the given BZ, in
-                        updates
-  --cves=CVES           Include packages needed to fix the given CVE, in
-                        updates
-  --sec-severity=SEVS, --secseverity=SEVS
+                        Include packages needed to fix the given advisory, in updates
+  --bzs=BZS             Include packages needed to fix the given BZ, in updates
+  --cves=CVES           Include packages needed to fix the given CVE, in updates
+  --sec-severity=SEVS   Include packages based on security severity level in updates
                         Include security relevant packages matching the
                         severity, in updates
   --tsflags=TSFLAGS

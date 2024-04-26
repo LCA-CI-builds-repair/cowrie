@@ -92,9 +92,7 @@ Options: (H) means HTTP/HTTPS only, (F) means FTP only
      --mail-auth AUTH  Originator address of the original email
      --max-filesize BYTES  Maximum file size to download (H/F)
      --max-redirs NUM  Maximum number of redirects allowed (H)
- -m, --max-time SECONDS  Maximum time allowed for the transfer
      --negotiate     Use HTTP Negotiate Authentication (H)
- -n, --netrc         Must read .netrc for user name and password
      --netrc-optional Use either .netrc or URL; overrides -n
      --netrc-file FILE  Set up the netrc filename to use
  -N, --no-buffer     Disable buffering of the output stream
@@ -130,13 +128,12 @@ Options: (H) means HTTP/HTTPS only, (F) means FTP only
      --remote-name-all Use the remote file name for all URLs
  -R, --remote-time   Set the remote file's time on the local output
  -X, --request COMMAND  Specify request command to use
+ -R, --remote-time   Set the remote file's time on the local output
      --resolve HOST:PORT:ADDRESS  Force resolve of HOST:PORT to ADDRESS
      --retry NUM   Retry request NUM times if transient problems occur
      --retry-delay SECONDS When retrying, wait this many seconds between each
      --retry-max-time SECONDS  Retry only within this period
  -S, --show-error    Show error. With -s, make curl show errors when they occur
- -s, --silent        Silent mode. Don't output anything
-     --socks4 HOST[:PORT]  SOCKS4 proxy on given host + port
      --socks4a HOST[:PORT]  SOCKS4a proxy on given host + port
      --socks5 HOST[:PORT]  SOCKS5 proxy on given host + port
      --socks5-hostname HOST[:PORT] SOCKS5 proxy, pass host name to proxy

@@ -3,12 +3,7 @@ import json
 from configparser import NoOptionError
 
 import oci
-import secrets
-import string
 import oci
-from oci import auth
-import datetime
-
 import cowrie.core.output
 from cowrie.core.config import CowrieConfig
 

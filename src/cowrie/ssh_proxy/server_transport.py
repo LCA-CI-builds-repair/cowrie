@@ -301,13 +301,15 @@ class FrontendSSHTransport(transport.SSHServerTransport, TimeoutMixin):
         )
 
         # hassh SSH client fingerprint
+import hashlib
+
         # https://github.com/salesforce/hassh
         ckexAlgs = ",".join([alg.decode("utf-8") for alg in kexAlgs])
         cencCS = ",".join([alg.decode("utf-8") for alg in encCS])
         cmacCS = ",".join([alg.decode("utf-8") for alg in macCS])
         ccompCS = ",".join([alg.decode("utf-8") for alg in compCS])
         hasshAlgorithms = f"{ckexAlgs};{cencCS};{cmacCS};{ccompCS}"
-        hassh = md5(hasshAlgorithms.encode("utf-8")).hexdigest()
+        hassh = hashlib.md5(hasshAlgorithms.encode("utf-8")).hexdigest()
 
         log.msg(
             eventid="cowrie.client.kex",

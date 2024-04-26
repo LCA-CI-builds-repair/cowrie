@@ -188,10 +188,10 @@ class Command_printf(HoneyPotCommand):
                 s = "".join(self.args[0]).replace("\\\\x", "\\x")
 
                 # replace single character escape \x0 with \x00
-                s = re.sub(r"(?<=\\)x([0-9a-fA-F])(?=\\|\"|\'|\s|$)", r"x0\g<1>", s)
+                s = re.sub(r"(?<!\\)x([0-9a-fA-F])(?![0-9a-fA-F])", r"x0\g<1>", s)
 
                 # strip single and double quotes
-                s = s.strip("\"'")
+                s = s.strip("\'\"")
 
                 # if the string ends with \c escape, strip it
                 if s.endswith("\\c"):

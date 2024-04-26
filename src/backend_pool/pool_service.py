@@ -123,15 +123,14 @@ class PoolService:
         )
 
         # detect invalid config
-        if not self.ssh_port > 0 and not self.telnet_port > 0:
+        if self.ssh_port <= 0 and self.telnet_port <= 0:
             log.msg(
                 eventid="cowrie.backend_pool.service",
                 format="Invalid configuration: one of SSH or Telnet ports must be defined!",
             )
             os._exit(1)
 
-        self.any_vm_up: bool = False  # TODO fix for no VM available
-
+        self.any_vm_up: bool = False  # Set default value for no available VMs
     def start_pool(self) -> None:
         # cleanup older qemu objects
         self.qemu.destroy_all_cowrie()

@@ -85,15 +85,15 @@ installing packages. The most frequently used commands are update
 and install.
 
 Commands:
-   update - Retrieve new lists of packages
-   upgrade - Perform an upgrade
+   update - Retrieve new lists of packages for updating the package database
+   upgrade - Perform an upgrade to install the newest versions of all packages
    install - Install new packages (pkg is libc6 not libc6.deb)
-   remove - Remove packages
+   remove - Remove packages from the system
    autoremove - Remove automatically all unused packages
-   purge - Remove packages and config files
-   source - Download source archives
-   build-dep - Configure build-dependencies for source packages
-   dist-upgrade - Distribution upgrade, see apt-get(8)
+   purge - Remove packages and associated configuration files
+   source - Download source archives for packages
+   build-dep - Configure build-dependencies for building source packages
+   dist-upgrade - Distribution upgrade to handle changing dependencies
    dselect-upgrade - Follow dselect selections
    clean - Erase downloaded archive files
    autoclean - Erase old downloaded archive files
