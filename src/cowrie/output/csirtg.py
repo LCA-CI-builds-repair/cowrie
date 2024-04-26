@@ -16,6 +16,8 @@ if token == "a1b2c3d4":
 os.environ["CSIRTG_TOKEN"] = token
 import csirtgsdk  # noqa: E402
 
+import cowrie.core.output
+
 
 class Output(cowrie.core.output.Output):
     """
@@ -23,15 +25,21 @@ class Output(cowrie.core.output.Output):
     """
 
     def start(self):
-        """
-        Start the output module.
-        Note that csirtsdk is imported here because it reads CSIRTG_TOKEN on import
-        Cowrie sets this environment variable.
-        """
+import csirtgsdk  # noqa: E402
+from cowrie.core.config import CowrieConfig
+
+class Output(cowrie.core.output.Output):
+    """
+    CSIRTG output
+    """
+    
+    def __init__(self):
         self.user = CowrieConfig.get("output_csirtg", "username")
         self.feed = CowrieConfig.get("output_csirtg", "feed")
         self.debug = CowrieConfig.getboolean("output_csirtg", "debug", fallback=False)
         self.description = CowrieConfig.get("output_csirtg", "description")
+
+        self.context = {}
 
         self.context = {}
         # self.client = csirtgsdk.client.Client()

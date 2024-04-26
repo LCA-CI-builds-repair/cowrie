@@ -270,9 +270,7 @@ class PoolService:
                         eventid="cowrie.backend_pool.service",
                         format="Guest %(guest_id)s (%(guest_ip)s) marked for deletion (timed-out)",
                         guest_id=guest["id"],
-                        guest_ip=guest["guest_ip"],
-                    )
-                    guest["state"] = POOL_STATE_UNAVAILABLE
+guest["state"] = POOL_STATE_UNAVAILABLE
 
     def __producer_check_health(self) -> None:
         """
@@ -440,12 +438,14 @@ class PoolService:
 
         # raise excaption if a valid VM was not found
         if not guest:
-            # TODO fix for no VM available
-            if self.any_vm_up:
-                log.msg("Inconsistent state in pool, restarting...")
-                self.stop_pool()
-            raise NoAvailableVMs()
+import log  # Add the necessary import statement for the log module
 
+# Raise exception if a valid VM was not found
+if not guest:
+    # TODO: Fix for no VM available
+    if self.any_vm_up:
+        log.msg("Inconsistent state in pool, restarting...")
+        self.stop_pool()
         guest["prev_state"] = guest["state"]
         guest["state"] = POOL_STATE_USING
         guest["connected"] += 1

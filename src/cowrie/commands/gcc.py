@@ -59,6 +59,7 @@ class Command_gcc(HoneyPotCommand):
         that is requested. The file that is generated can be read (and will)
         output garbage from an actual file, but when executed, it will generate
         a segmentation fault.
+        """
 
         The input files are expected to exists, but can be empty.
 
@@ -182,8 +183,8 @@ gcc version {} (Debian {}-5)""".format(
             )
 
         # Write
-        self.write(f"{data}\n")
-        self.exit()
+# Exit the command execution
+self.exit()
 
     def generate_file(self, outfile: str) -> None:
         data = b""

@@ -1,12 +1,9 @@
 from __future__ import annotations
 import json
 from configparser import NoOptionError
-
 import oci
 import secrets
 import string
-import oci
-from oci import auth
 import datetime
 
 import cowrie.core.output
@@ -18,8 +15,10 @@ class Output(cowrie.core.output.Output):
     Oracle Cloud output
     """
 
-
     def generate_random_log_id(self):
+        """
+        Generates a random log ID for Oracle Cloud
+        """
         charset = string.ascii_letters + string.digits
         random_log_id = ''.join(secrets.choice(charset) for _ in range(32))
         return f"cowrielog-{random_log_id}"

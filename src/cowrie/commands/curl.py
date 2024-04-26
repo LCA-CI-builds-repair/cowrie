@@ -89,13 +89,13 @@ Options: (H) means HTTP/HTTPS only, (F) means FTP only
  -M, --manual        Display the full manual
      --mail-from FROM  Mail from this address
      --mail-rcpt TO  Mail to this receiver(s)
-     --mail-auth AUTH  Originator address of the original email
-     --max-filesize BYTES  Maximum file size to download (H/F)
-     --max-redirs NUM  Maximum number of redirects allowed (H)
- -m, --max-time SECONDS  Maximum time allowed for the transfer
-     --negotiate     Use HTTP Negotiate Authentication (H)
- -n, --netrc         Must read .netrc for user name and password
-     --netrc-optional Use either .netrc or URL; overrides -n
+     --mail-auth AUTH        Originator address of the original email
+     --max-filesize BYTES    Maximum file size to download (H/F)
+     --max-redirs NUM        Maximum number of redirects allowed (H)
+ -m, --max-time SECONDS      Maximum time allowed for the transfer
+     --negotiate             Use HTTP Negotiate Authentication (H)
+ -n, --netrc                 Must read .netrc for user name and password
+     --netrc-optional        Use either .netrc or URL; overrides -n
      --netrc-file FILE  Set up the netrc filename to use
  -N, --no-buffer     Disable buffering of the output stream
      --no-keepalive  Disable keepalive use on the connection
@@ -124,13 +124,13 @@ Options: (H) means HTTP/HTTPS only, (F) means FTP only
      --random-file FILE  File for reading random data from (SSL)
  -r, --range RANGE   Retrieve only the bytes within a range
      --raw           Do HTTP "raw", without any transfer decoding (H)
- -e, --referer       Referer URL (H)
- -J, --remote-header-name Use the header-provided filename (H)
- -O, --remote-name   Write output to a file named as the remote file
-     --remote-name-all Use the remote file name for all URLs
- -R, --remote-time   Set the remote file's time on the local output
- -X, --request COMMAND  Specify request command to use
-     --resolve HOST:PORT:ADDRESS  Force resolve of HOST:PORT to ADDRESS
+ -e, --referer                   Referer URL (H)
+ -J, --remote-header-name        Use the header-provided filename (H)
+ -O, --remote-name               Write output to a file named as the remote file
+     --remote-name-all           Use the remote file name for all URLs
+ -R, --remote-time               Set the remote file's time on the local output
+ -X, --request COMMAND           Specify request command to use
+     --resolve HOST:PORT:ADDRESS Force resolve of HOST:PORT to ADDRESS
      --retry NUM   Retry request NUM times if transient problems occur
      --retry-delay SECONDS When retrying, wait this many seconds between each
      --retry-max-time SECONDS  Retry only within this period
@@ -381,11 +381,16 @@ class Command_curl(HoneyPotCommand):
         log.msg(
             eventid="cowrie.session.file_download",
             format="Downloaded URL (%(url)s) with SHA-256 %(shasum)s to %(outfile)s",
-            url=self.url.decode(),
-            outfile=self.artifact.shasumFilename,
-            shasum=self.artifact.shasum,
-        )
-        self.exit()
+# Decode the URL if necessary
+url = self.url.decode()
+
+# Check for the existence of shasumFilename and shasum before usage
+if self.artifact.shasumFilename and self.artifact.shasum:
+    # Perform the required operation with the decoded URL and artifact details
+    some_function(url=url, outfile=self.artifact.shasumFilename, shasum=self.artifact.shasum)
+
+# Exit the command execution
+self.exit()
 
     def error(self, response):
         """

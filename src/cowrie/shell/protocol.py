@@ -236,6 +236,9 @@ class HoneyPotExecProtocol(HoneyPotBaseProtocol):
         HoneyPotBaseProtocol.__init__(self, avatar)
 
     def connectionMade(self) -> None:
+class HoneyPotBaseProtocol(protocol.Protocol):
+
+    def connectionMade(self):
         HoneyPotBaseProtocol.connectionMade(self)
         self.setTimeout(60)
         self.cmdstack = [honeypot.HoneyPotShell(self, interactive=False)]
@@ -246,13 +249,17 @@ class HoneyPotExecProtocol(HoneyPotBaseProtocol):
     def keystrokeReceived(self, keyID, modifier):
         self.input_data += keyID
 
+    def executeCommand(self, command):
+        pass
+
 
 class HoneyPotInteractiveProtocol(HoneyPotBaseProtocol, recvline.HistoricRecvLine):
+
     def __init__(self, avatar):
         recvline.HistoricRecvLine.__init__(self)
         HoneyPotBaseProtocol.__init__(self, avatar)
 
-    def connectionMade(self) -> None:
+    def connectionMade(self):
         self.displayMOTD()
 
         HoneyPotBaseProtocol.connectionMade(self)
