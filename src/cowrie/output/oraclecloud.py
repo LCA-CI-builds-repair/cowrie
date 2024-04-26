@@ -93,15 +93,12 @@ class Output(cowrie.core.output.Output):
             raise ValueError("Invalid authentication type")
 
     def stop(self):
-        pass
-
     def write(self, logentry):
         """
         Push to Oracle Cloud put_logs
         """
-        # Add the entry to redis
-        for i in list(logentry.keys()):
-            # Remove twisted 15 legacy keys
-            if i.startswith("log_"):
-                del logentry[i]
+        # Remove twisted 15 legacy keys
+        keys_to_delete = [key for key in logentry if key.startswith("log_")]
+        for key in keys_to_delete:
+            del logentry[key]
         self.sendLogs(json.dumps(logentry))
