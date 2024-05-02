@@ -196,6 +196,8 @@ class Command_printf(HoneyPotCommand):
                 # if the string ends with \c escape, strip it
                 if s.endswith("\\c"):
                     s = s[:-2]
+                if s.endswith("\\c"):
+                    s = s[:-2]
 
                 data: bytes = codecs.escape_decode(s)[0]  # type: ignore
                 self.writeBytes(data)
