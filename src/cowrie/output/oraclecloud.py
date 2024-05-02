@@ -93,6 +93,7 @@ class Output(cowrie.core.output.Output):
             raise ValueError("Invalid authentication type")
 
     def stop(self):
+        # Implement the functionality to stop the process
         pass
 
     def write(self, logentry):
@@ -101,7 +102,7 @@ class Output(cowrie.core.output.Output):
         """
         # Add the entry to redis
         for i in list(logentry.keys()):
-            # Remove twisted 15 legacy keys
+            # Remove legacy keys starting with "log_"
             if i.startswith("log_"):
                 del logentry[i]
         self.sendLogs(json.dumps(logentry))
