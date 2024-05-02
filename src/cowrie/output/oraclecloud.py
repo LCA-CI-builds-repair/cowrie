@@ -100,8 +100,5 @@ class Output(cowrie.core.output.Output):
         Push to Oracle Cloud put_logs
         """
         # Add the entry to redis
-        for i in list(logentry.keys()):
-            # Remove twisted 15 legacy keys
-            if i.startswith("log_"):
-                del logentry[i]
+        logentry = {k: v for k, v in logentry.items() if not k.startswith("log_")}
         self.sendLogs(json.dumps(logentry))

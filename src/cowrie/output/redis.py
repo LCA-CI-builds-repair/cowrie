@@ -55,8 +55,5 @@ class Output(cowrie.core.output.Output):
         Push to redis
         """
         # Add the entry to redis
-        for i in list(logentry.keys()):
-            # Remove twisted 15 legacy keys
-            if i.startswith("log_"):
-                del logentry[i]
+        logentry = {k: v for k, v in logentry.items() if not k.startswith("log_")}
         self.send_method(self.redis, self.keyname, json.dumps(logentry))

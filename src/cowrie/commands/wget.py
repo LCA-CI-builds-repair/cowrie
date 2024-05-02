@@ -115,15 +115,12 @@ class Command_wget(HoneyPotCommand):
 
         if urldata.hostname:
             self.host = urldata.hostname
-        else:
-            pass
 
-        # TODO: need to do full name resolution in case someon passes DNS name pointing to local address
+        # TODO: need to do full name resolution in case someone passes a DNS name pointing to a local address
         try:
             if ipaddress.ip_address(self.host).is_private:
                 self.errorWrite(f"curl: (6) Could not resolve host: {self.host}\n")
                 self.exit()
-                return None
         except ValueError:
             pass
 
