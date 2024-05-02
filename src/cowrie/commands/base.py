@@ -200,7 +200,6 @@ class Command_printf(HoneyPotCommand):
                 data: bytes = codecs.escape_decode(s)[0]  # type: ignore
                 self.writeBytes(data)
 
-
 commands["/usr/bin/printf"] = Command_printf
 commands["printf"] = Command_printf
 

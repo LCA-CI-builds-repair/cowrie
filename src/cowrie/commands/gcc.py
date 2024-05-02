@@ -61,7 +61,6 @@ class Command_gcc(HoneyPotCommand):
         a segmentation fault.
 
         The input files are expected to exists, but can be empty.
-
         Verified syntaxes, including non-existing files:
         * gcc test.c
         * gcc test.c -o program
