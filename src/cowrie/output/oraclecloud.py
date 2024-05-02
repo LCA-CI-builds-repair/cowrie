@@ -3,9 +3,6 @@ import json
 from configparser import NoOptionError
 
 import oci
-import secrets
-import string
-import oci
 from oci import auth
 import datetime
 

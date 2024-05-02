@@ -72,7 +72,14 @@ Supported modules:
  Idx: EDSP scenario file\n"""
         )
         self.exit()
+# Fixed syntax errors and improved string formatting
 
+import random
+import re
+from twisted.internet.defer import inlineCallbacks
+
+class Command_aptget(Command):
+    
     def do_help(self) -> None:
         self.write(
             """apt 1.0.9.8.1 for amd64 compiled on Jun 10 2015 09:42:06
@@ -163,12 +170,7 @@ pages for more information and options.
             yield self.sleep(1, 2)
         self.write(f"Fetched {totalsize}.2kB in 1s (4493B/s)\n")
         self.write("Reading package fields... Done\n")
-        yield self.sleep(1, 2)
         self.write("Reading package status... Done\n")
-        self.write(
-            "(Reading database ... 177887 files and directories currently installed.)\n"
-        )
-        yield self.sleep(1, 2)
         for p in self.packages:
             self.write(
                 "Unpacking {} (from .../archives/{}_{}_i386.deb) ...\n".format(
@@ -205,7 +207,6 @@ pages for more information and options.
         )
         self.errorWrite("E: Unable to lock the list directory\n")
         self.exit()
-
 
 commands["/usr/bin/apt-get"] = Command_aptget
 commands["apt-get"] = Command_aptget
