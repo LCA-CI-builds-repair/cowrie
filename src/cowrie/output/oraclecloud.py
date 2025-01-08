@@ -85,7 +85,7 @@ class Output(cowrie.core.output.Output):
                 "key_file": keyfile,
                 "fingerprint": fingerprint,
                 "tenancy": tenancy_ocid,
-                "region": region
+                "region": region,
             }
             oci.config.validate_config(config_with_key_content)
             self.loggingingestion_client = oci.loggingingestion.LoggingClient(config_with_key_content)
