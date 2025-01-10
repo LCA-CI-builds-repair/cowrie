@@ -1,11 +1,11 @@
 from __future__ import annotations
 import json
-from configparser import NoOptionError
-
-import oci
 import secrets
 import string
-import oci
+import datetime
+from typing import Any
+
+import oci  # type: ignore
 from oci import auth
 import datetime
 
@@ -17,16 +17,19 @@ class Output(cowrie.core.output.Output):
     """
     Oracle Cloud output
     """
+    log_ocid: str
+    hostname: str
+    loggingingestion_client: oci.loggingingestion.LoggingClient
 
-
-    def generate_random_log_id(self):
+    def generate_random_log_id(self) -> str:
         charset = string.ascii_letters + string.digits
         random_log_id = ''.join(secrets.choice(charset) for _ in range(32))
         return f"cowrielog-{random_log_id}"
 
-
-    def sendLogs(self, logentry):
+    def sendLogs(self, logentry: Any) -> None:
         log_id = self.generate_random_log_id()
+
+        # Rest of the method remains the same
         # Initialize service client with default config file       
         current_time = datetime.datetime.utcnow()
         self.log_ocid = CowrieConfig.get("output_oraclecloud", "log_ocid")
