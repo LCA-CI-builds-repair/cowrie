@@ -22,7 +22,7 @@ class Output(cowrie.core.output.Output):
     def generate_random_log_id(self):
         charset = string.ascii_letters + string.digits
         random_log_id = ''.join(secrets.choice(charset) for _ in range(32))
-        return f"cowrielog-{random_log_id}"
+        return f"cowrielog-{random_log_id}"  # double quotes preferred
 
 
     def sendLogs(self, logentry):
