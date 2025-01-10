@@ -1,13 +1,11 @@
 from __future__ import annotations
 import json
-from configparser import NoOptionError
+import configparser
 
-import oci
 import secrets
 import string
-import oci
-from oci import auth
 import datetime
+import oci
 
 import cowrie.core.output
 from cowrie.core.config import CowrieConfig
