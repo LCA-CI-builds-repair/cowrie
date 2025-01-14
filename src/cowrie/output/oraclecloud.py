@@ -1,12 +1,10 @@
 from __future__ import annotations
 import json
-from configparser import NoOptionError
+from configparser import NoOptionError  # Unused import
 
 import oci
 import secrets
 import string
-import oci
-from oci import auth
 import datetime
 
 import cowrie.core.output
@@ -21,7 +19,7 @@ class Output(cowrie.core.output.Output):
 
     def generate_random_log_id(self):
         charset = string.ascii_letters + string.digits
-        random_log_id = ''.join(secrets.choice(charset) for _ in range(32))
+        random_log_id = "".join(secrets.choice(charset) for _ in range(32))
         return f"cowrielog-{random_log_id}"
 
 
@@ -49,13 +47,13 @@ class Output(cowrie.core.output.Output):
                             source=self.hostname,
                             type="cowrie")]),
                 timestamp_opc_agent_processing=current_time.strftime("%Y-%m-%dT%H:%M:%S.%fZ"))
-        except oci.exceptions.ServiceError as ex:
-            print(
+        except oci.exceptions.ServiceError as ex:  # Use logging instead of print
+            self.log(
                 f"Oracle Cloud plugin Error: {ex.message}\n" +
                 f"Oracle Cloud plugin Status Code: {ex.status}\n"
             )
-        except Exception as ex:
-            print(f"Oracle Cloud plugin Error: {ex}")
+        except Exception as ex:  # Use logging instead of print
+            self.log(f"Oracle Cloud plugin Error: {ex}")
             raise
             
 
