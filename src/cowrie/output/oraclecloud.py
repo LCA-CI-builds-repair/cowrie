@@ -25,7 +25,7 @@ class Output(cowrie.core.output.Output):
         return f"cowrielog-{random_log_id}"
 
 
-    def sendLogs(self, logentry):
+    def send_logs(self, logentry):
         log_id = self.generate_random_log_id()
         # Initialize service client with default config file       
         current_time = datetime.datetime.utcnow()
@@ -49,6 +49,13 @@ class Output(cowrie.core.output.Output):
                             source=self.hostname,
                             type="cowrie")]),
                 timestamp_opc_agent_processing=current_time.strftime("%Y-%m-%dT%H:%M:%S.%fZ"))
+        except oci.exceptions.ServiceError as ex:
+            print(f"Oracle Cloud plugin Error: {ex.message}\n" +
+                  f"Oracle Cloud plugin Status Code: {ex.status}\n")
+        except Exception as ex:
+            print(f"Oracle Cloud plugin Error: {ex}")
+            raise
+            # Removed unused exception
         except oci.exceptions.ServiceError as ex:
             print(
                 f"Oracle Cloud plugin Error: {ex.message}\n" +
@@ -104,4 +111,4 @@ class Output(cowrie.core.output.Output):
             # Remove twisted 15 legacy keys
             if i.startswith("log_"):
                 del logentry[i]
-        self.sendLogs(json.dumps(logentry))
+        self.send_logs(json.dumps(logentry))
