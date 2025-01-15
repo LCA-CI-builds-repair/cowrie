@@ -22,7 +22,7 @@ class Output(cowrie.core.output.Output):
     def generate_random_log_id(self):
         charset = string.ascii_letters + string.digits
         random_log_id = ''.join(secrets.choice(charset) for _ in range(32))
-        return f"cowrielog-{random_log_id}"
+        return f"CowrieLog-{random_log_id}"
 
 
     def sendLogs(self, logentry):
@@ -55,7 +55,7 @@ class Output(cowrie.core.output.Output):
                 f"Oracle Cloud plugin Status Code: {ex.status}\n"
             )
         except Exception as ex:
-            print(f"Oracle Cloud plugin Error: {ex}")
+            logging.error(f"Oracle Cloud plugin Error: {ex}")
             raise
             
 
