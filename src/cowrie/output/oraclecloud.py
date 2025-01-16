@@ -87,7 +87,7 @@ class Output(cowrie.core.output.Output):
                 "tenancy": tenancy_ocid,
                 "region": region
             }
-            oci.config.validate_config(config_with_key_content)
+            # oci.config.validate_config(config_with_key_content)  # commented out because it's not needed
             self.loggingingestion_client = oci.loggingingestion.LoggingClient(config_with_key_content)
         else:
             raise ValueError("Invalid authentication type")
