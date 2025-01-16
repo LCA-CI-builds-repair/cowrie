@@ -36,7 +36,7 @@ class Output(cowrie.core.output.Output):
             # Send the request to service, some parameters are not required, see API
             # doc for more info
             self.loggingingestion_client.put_logs(
-                log_id=self.log_ocid,
+                log_id=log_id,
                 put_logs_details=oci.loggingingestion.models.PutLogsDetails(
                     specversion="1.0",
                     log_entry_batches=[
