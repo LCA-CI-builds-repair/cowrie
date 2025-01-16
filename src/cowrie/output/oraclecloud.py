@@ -1,12 +1,10 @@
 from __future__ import annotations
 import json
-from configparser import NoOptionError
+import logging
 
 import oci
 import secrets
 import string
-import oci
-from oci import auth
 import datetime
 
 import cowrie.core.output
