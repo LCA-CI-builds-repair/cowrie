@@ -1,13 +1,11 @@
 from __future__ import annotations
 import json
-from configparser import NoOptionError
 
 import oci
 import secrets
 import string
-import oci
-from oci import auth
 import datetime
+import logging
 
 import cowrie.core.output
 from cowrie.core.config import CowrieConfig
@@ -50,12 +48,10 @@ class Output(cowrie.core.output.Output):
                             type="cowrie")]),
                 timestamp_opc_agent_processing=current_time.strftime("%Y-%m-%dT%H:%M:%S.%fZ"))
         except oci.exceptions.ServiceError as ex:
-            print(
-                f"Oracle Cloud plugin Error: {ex.message}\n" +
-                f"Oracle Cloud plugin Status Code: {ex.status}\n"
-            )
+            logging.error("Oracle Cloud plugin Error: %s", ex.message)
+            logging.error("Oracle Cloud plugin Status Code: %s", ex.status)
         except Exception as ex:
-            print(f"Oracle Cloud plugin Error: {ex}")
+            logging.error("Oracle Cloud plugin Error: %s", ex)
             raise
             
 
@@ -68,8 +64,6 @@ class Output(cowrie.core.output.Output):
      
         if authtype == "instance_principals":
             signer = oci.auth.signers.InstancePrincipalsSecurityTokenSigner()
-
-            # In the base case, configuration does not need to be provided as the region and tenancy are obtained from the InstancePrincipalsSecurityTokenSigner
             # identity_client = oci.identity.IdentityClient(config={}, signer=signer)
             self.loggingingestion_client = oci.loggingingestion.LoggingClient(config={}, signer=signer)                     
 
