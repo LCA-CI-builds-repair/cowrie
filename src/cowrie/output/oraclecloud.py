@@ -29,8 +29,11 @@ class Output(cowrie.core.output.Output):
         log_id = self.generate_random_log_id()
         # Initialize service client with default config file       
         current_time = datetime.datetime.utcnow()
-        self.log_ocid = CowrieConfig.get("output_oraclecloud", "log_ocid")
-        self.hostname = CowrieConfig.get("honeypot", "hostname")
+        try:
+            self.log_ocid = CowrieConfig.get("output_oraclecloud", "log_ocid")
+            self.hostname = CowrieConfig.get("honeypot", "hostname")
+        except Exception as e:
+            self.logger.error(f"Error getting configuration: {e}")
 
         try:
             # Send the request to service, some parameters are not required, see API
@@ -50,12 +53,10 @@ class Output(cowrie.core.output.Output):
                             type="cowrie")]),
                 timestamp_opc_agent_processing=current_time.strftime("%Y-%m-%dT%H:%M:%S.%fZ"))
         except oci.exceptions.ServiceError as ex:
-            print(
-                f"Oracle Cloud plugin Error: {ex.message}\n" +
-                f"Oracle Cloud plugin Status Code: {ex.status}\n"
-            )
+            self.logger.error(f"Oracle Cloud plugin Error: {ex.message}")
+            self.logger.error(f"Oracle Cloud plugin Status Code: {ex.status}")
         except Exception as ex:
-            print(f"Oracle Cloud plugin Error: {ex}")
+            self.logger.error(f"Oracle Cloud plugin Error: {ex}")
             raise
             
 
