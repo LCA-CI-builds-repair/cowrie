@@ -51,11 +51,12 @@ class Output(cowrie.core.output.Output):
                 timestamp_opc_agent_processing=current_time.strftime("%Y-%m-%dT%H:%M:%S.%fZ"))
         except oci.exceptions.ServiceError as ex:
             print(
-                f"Oracle Cloud plugin Error: {ex.message}\n" +
+                f"Oracle Cloud plugin Error: {ex.message}\n"
                 f"Oracle Cloud plugin Status Code: {ex.status}\n"
             )
         except Exception as ex:
             print(f"Oracle Cloud plugin Error: {ex}")
+            # Consider using logging instead of print for production code
             raise
             
 
