@@ -19,6 +19,8 @@ class Output(cowrie.core.output.Output):
     """
 
 
+    def __init__(self):
+        self.logger = logging.getLogger(__name__)
     def generate_random_log_id(self):
         charset = string.ascii_letters + string.digits
         random_log_id = ''.join(secrets.choice(charset) for _ in range(32))
