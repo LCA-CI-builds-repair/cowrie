@@ -55,7 +55,8 @@ class Output(cowrie.core.output.Output):
                 f"Oracle Cloud plugin Status Code: {ex.status}\n"
             )
         except Exception as ex:
-            print(f"Oracle Cloud plugin Error: {ex}")
+            # Use a logger instead of print
+    logger.error(f"Oracle Cloud plugin Error: {ex}")
             raise
             
 
