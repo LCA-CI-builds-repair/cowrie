@@ -2,7 +2,8 @@ from __future__ import annotations
 import json
 from configparser import NoOptionError
 
-import oci
+from oci import loggingingestion
+from oci.loggingingestion import models
 import secrets
 import string
 import oci
@@ -20,12 +21,12 @@ class Output(cowrie.core.output.Output):
 
 
     def generate_random_log_id(self):
-        charset = string.ascii_letters + string.digits
+        charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
         random_log_id = ''.join(secrets.choice(charset) for _ in range(32))
         return f"cowrielog-{random_log_id}"
 
 
-    def sendLogs(self, logentry):
+    def send_logs(self, logentry):
         log_id = self.generate_random_log_id()
         # Initialize service client with default config file       
         current_time = datetime.datetime.utcnow()
@@ -37,25 +38,25 @@ class Output(cowrie.core.output.Output):
             # doc for more info
             self.loggingingestion_client.put_logs(
                 log_id=self.log_ocid,
-                put_logs_details=oci.loggingingestion.models.PutLogsDetails(
+                put_logs_details=models.PutLogsDetails(
                     specversion="1.0",
                     log_entry_batches=[
-                        oci.loggingingestion.models.LogEntryBatch(
+                        models.LogEntryBatch(
                             entries=[
-                                oci.loggingingestion.models.LogEntry(
+                                models.LogEntry(
                                     data=logentry,
                                     id=log_id,
                                     time=current_time.strftime("%Y-%m-%dT%H:%M:%S.%fZ"))],
                             source=self.hostname,
                             type="cowrie")]),
                 timestamp_opc_agent_processing=current_time.strftime("%Y-%m-%dT%H:%M:%S.%fZ"))
-        except oci.exceptions.ServiceError as ex:
-            print(
+        except loggingingestion.exceptions.ServiceError as ex:
+            logging.error(
                 f"Oracle Cloud plugin Error: {ex.message}\n" +
                 f"Oracle Cloud plugin Status Code: {ex.status}\n"
             )
         except Exception as ex:
-            print(f"Oracle Cloud plugin Error: {ex}")
+            logging.error(f"Oracle Cloud plugin Error: {ex}")
             raise
             
 
@@ -104,4 +105,4 @@ class Output(cowrie.core.output.Output):
             # Remove twisted 15 legacy keys
             if i.startswith("log_"):
                 del logentry[i]
-        self.sendLogs(json.dumps(logentry))
+        self.send_logs(json.dumps(logentry))
