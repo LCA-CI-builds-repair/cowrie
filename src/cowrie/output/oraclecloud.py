@@ -50,12 +50,12 @@ class Output(cowrie.core.output.Output):
                             type="cowrie")]),
                 timestamp_opc_agent_processing=current_time.strftime("%Y-%m-%dT%H:%M:%S.%fZ"))
         except oci.exceptions.ServiceError as ex:
-            print(
+            self.logger.error(
                 f"Oracle Cloud plugin Error: {ex.message}\n" +
                 f"Oracle Cloud plugin Status Code: {ex.status}\n"
             )
         except Exception as ex:
-            print(f"Oracle Cloud plugin Error: {ex}")
+            self.logger.error(f"Oracle Cloud plugin Error: {ex}")
             raise
             
 
@@ -63,7 +63,7 @@ class Output(cowrie.core.output.Output):
         """
         Initialize Oracle Cloud LoggingClient with user or instance principal authentication
         """
-
+        self.logger = CowrieConfig.get_logger('output_oraclecloud')
         authtype=CowrieConfig.get("output_oraclecloud", "authtype")
      
         if authtype == "instance_principals":
@@ -92,7 +92,7 @@ class Output(cowrie.core.output.Output):
         else:
             raise ValueError("Invalid authentication type")
 
-    def stop(self):
+    def stop(self) -> None:
         pass
 
     def write(self, logentry):
