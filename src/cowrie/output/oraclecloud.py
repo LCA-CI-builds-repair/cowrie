@@ -1,13 +1,10 @@
 from __future__ import annotations
 import json
-from configparser import NoOptionError
-
-import oci
 import secrets
 import string
-import oci
-from oci import auth
 import datetime
+
+import oci
 
 import cowrie.core.output
 from cowrie.core.config import CowrieConfig
@@ -50,12 +47,12 @@ class Output(cowrie.core.output.Output):
                             type="cowrie")]),
                 timestamp_opc_agent_processing=current_time.strftime("%Y-%m-%dT%H:%M:%S.%fZ"))
         except oci.exceptions.ServiceError as ex:
-            print(
+            self.loggingingestion_client.logger.error(
                 f"Oracle Cloud plugin Error: {ex.message}\n" +
                 f"Oracle Cloud plugin Status Code: {ex.status}\n"
             )
         except Exception as ex:
-            print(f"Oracle Cloud plugin Error: {ex}")
+            self.loggingingestion_client.logger.exception("Oracle Cloud plugin Error")
             raise
             
 
