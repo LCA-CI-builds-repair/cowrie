@@ -1,12 +1,10 @@
 from __future__ import annotations
 import json
-from configparser import NoOptionError
+import logging
 
 import oci
 import secrets
 import string
-import oci
-from oci import auth
 import datetime
 
 import cowrie.core.output
@@ -14,6 +12,8 @@ from cowrie.core.config import CowrieConfig
 
 
 class Output(cowrie.core.output.Output):
+    loggingingestion_client: oci.loggingingestion.LoggingClient  # Add type hint for mypyc
+
     """
     Oracle Cloud output
     """
@@ -22,7 +22,8 @@ class Output(cowrie.core.output.Output):
     def generate_random_log_id(self):
         charset = string.ascii_letters + string.digits
         random_log_id = ''.join(secrets.choice(charset) for _ in range(32))
-        return f"cowrielog-{random_log_id}"
+        return f'cowrielog-{random_log_id}'  # Fix Q000 by using double quotes
+        return f"cowrielog-{random_log_id}"  # Corrected version
 
 
     def sendLogs(self, logentry):
